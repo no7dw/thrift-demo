@@ -43,28 +43,28 @@ User.prototype.read = function(input) {
     }
     switch (fid)
     {
-      case -1:
+      case 1:
       if (ftype == Thrift.Type.STRING) {
         this.uid = input.readString();
       } else {
         input.skip(ftype);
       }
       break;
-      case -2:
+      case 2:
       if (ftype == Thrift.Type.STRING) {
         this.uname = input.readString();
       } else {
         input.skip(ftype);
       }
       break;
-      case -3:
+      case 3:
       if (ftype == Thrift.Type.BOOL) {
         this.usex = input.readBool();
       } else {
         input.skip(ftype);
       }
       break;
-      case -4:
+      case 4:
       if (ftype == Thrift.Type.I16) {
         this.uage = input.readI16();
       } else {
@@ -83,22 +83,22 @@ User.prototype.read = function(input) {
 User.prototype.write = function(output) {
   output.writeStructBegin('User');
   if (this.uid !== null && this.uid !== undefined) {
-    output.writeFieldBegin('uid', Thrift.Type.STRING, -1);
+    output.writeFieldBegin('uid', Thrift.Type.STRING, 1);
     output.writeString(this.uid);
     output.writeFieldEnd();
   }
   if (this.uname !== null && this.uname !== undefined) {
-    output.writeFieldBegin('uname', Thrift.Type.STRING, -2);
+    output.writeFieldBegin('uname', Thrift.Type.STRING, 2);
     output.writeString(this.uname);
     output.writeFieldEnd();
   }
   if (this.usex !== null && this.usex !== undefined) {
-    output.writeFieldBegin('usex', Thrift.Type.BOOL, -3);
+    output.writeFieldBegin('usex', Thrift.Type.BOOL, 3);
     output.writeBool(this.usex);
     output.writeFieldEnd();
   }
   if (this.uage !== null && this.uage !== undefined) {
-    output.writeFieldBegin('uage', Thrift.Type.I16, -4);
+    output.writeFieldBegin('uage', Thrift.Type.I16, 4);
     output.writeI16(this.uage);
     output.writeFieldEnd();
   }

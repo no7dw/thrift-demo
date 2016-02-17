@@ -1,9 +1,7 @@
 var thrift = require('thrift');
-var ThriftTransports = require('thrift/transport');
-var ThriftProtocols = require('thrift/protocol');
+var transport = thrift.TBufferedTransport();
+var protocol = thrift.TBinaryProtocol();
 
-transport = ThriftTransports.TBufferedTransport()
-protocol = ThriftProtocols.TBinaryProtocol()
 
 var UserService = require('./gen-nodejs/UserService.js'),
     ttypes = require('./gen-nodejs/user_types');
@@ -25,18 +23,18 @@ connection.on('error', function(err) {
   console.error(err);
 });
 
-client.add(1, user, function(err, response) {
+client.add( 1, user, function(err, response) {
   if (err) {
     console.error(err);
   } else {
     console.log("client stored:", user.uid);
   }
 });
-client.get(1, user.uid, function(err, responseUser) {
-	if (err) {
-		console.error(err);
-	} else {
-		console.log("client retrieved:", responseUser.uid);
-		connection.end();
-	}
-});
+//client.get( user.uid, function(err, responseUser) {
+//	if (err) {
+//		console.error(err);
+//	} else {
+//		console.log("client retrieved:", responseUser.uid);
+//		connection.end();
+//	}
+//});
