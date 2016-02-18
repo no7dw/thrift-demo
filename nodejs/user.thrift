@@ -6,5 +6,5 @@
 }  
 service UserService{  
     void add(1: User u),  
-    User get(1: string uid),  
+#    User get(1: string uid),  
 }  

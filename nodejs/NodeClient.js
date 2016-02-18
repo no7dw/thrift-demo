@@ -15,15 +15,16 @@ var connection = thrift.createConnection('localhost', 9090
 
 var    client = thrift.createClient(UserService, connection);
 
-var user = new ttypes.User({uid: 1,
-                                   name: "Mark Slee",
-                                   blurb: "I'll find something to put here."});
+var user = new ttypes.User();
+user.uid=1;
+user.name= "Mark Slee";
+user.blurb = "I'll find something to put here.";
 
 connection.on('error', function(err) {
   console.error(err);
 });
 
-client.add( 1, user, function(err, response) {
+client.add(user, function(err, response) {
   if (err) {
     console.error(err);
   } else {
