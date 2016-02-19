@@ -66,6 +66,12 @@ UserService_add_args.prototype.write = function(output) {
 };
 
 UserService_add_result = function(args) {
+  this.success = null;
+  if (args) {
+    if (args.success !== undefined && args.success !== null) {
+      this.success = args.success;
+    }
+  }
 };
 UserService_add_result.prototype = {};
 UserService_add_result.prototype.read = function(input) {
@@ -79,7 +85,21 @@ UserService_add_result.prototype.read = function(input) {
     if (ftype == Thrift.Type.STOP) {
       break;
     }
-    input.skip(ftype);
+    switch (fid)
+    {
+      case 0:
+      if (ftype == Thrift.Type.I32) {
+        this.success = input.readI32();
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 0:
+        input.skip(ftype);
+        break;
+      default:
+        input.skip(ftype);
+    }
     input.readFieldEnd();
   }
   input.readStructEnd();
@@ -88,6 +108,11 @@ UserService_add_result.prototype.read = function(input) {
 
 UserService_add_result.prototype.write = function(output) {
   output.writeStructBegin('UserService_add_result');
+  if (this.success !== null && this.success !== undefined) {
+    output.writeFieldBegin('success', Thrift.Type.I32, 0);
+    output.writeI32(this.success);
+    output.writeFieldEnd();
+  }
   output.writeFieldStop();
   output.writeStructEnd();
   return;
@@ -144,7 +169,10 @@ UserServiceClient.prototype.recv_add = function(input,mtype,rseqid) {
   result.read(input);
   input.readMessageEnd();
 
-  callback(null)
+  if (null !== result.success) {
+    return callback(null, result.success);
+  }
+  return callback('add failed: unknown result');
 };
 UserServiceProcessor = exports.Processor = function(handler) {
   this._handler = handler

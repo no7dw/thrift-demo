@@ -14,5 +14,5 @@ var server = thrift.createServer(UserService, {
   }
 });
 
-server.listen(7911);
+server.listen(9090);
 console.log('server start');
