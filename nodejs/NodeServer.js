@@ -10,7 +10,7 @@ var server = thrift.createServer(UserService, {
    add: function(user, callback) {
     console.log("server stored:", user.uname);
     users[user.uid] = user;
-    callback();
+    callback(null, user.uid);
   }
 });
 
