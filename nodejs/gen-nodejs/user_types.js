@@ -44,8 +44,8 @@ User.prototype.read = function(input) {
     switch (fid)
     {
       case 1:
-      if (ftype == Thrift.Type.STRING) {
-        this.uid = input.readString();
+      if (ftype == Thrift.Type.I32) {
+        this.uid = input.readI32();
       } else {
         input.skip(ftype);
       }
@@ -83,8 +83,8 @@ User.prototype.read = function(input) {
 User.prototype.write = function(output) {
   output.writeStructBegin('User');
   if (this.uid !== null && this.uid !== undefined) {
-    output.writeFieldBegin('uid', Thrift.Type.STRING, 1);
-    output.writeString(this.uid);
+    output.writeFieldBegin('uid', Thrift.Type.I32, 1);
+    output.writeI32(this.uid);
     output.writeFieldEnd();
   }
   if (this.uname !== null && this.uname !== undefined) {
