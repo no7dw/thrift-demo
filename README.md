@@ -70,7 +70,7 @@ ok. 接下来，
     userData.name = "dengwei";
     userData.age = 30;
 
-step 3: 真实的调用服务：
+## step 3: 真实的调用服务：
 
     var client = thrift.createClient(UserService, connection);
     
