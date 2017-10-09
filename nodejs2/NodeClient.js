@@ -18,10 +18,20 @@ var client = thrift.createClient(Message, connection);
 
 var sendData = new ttypes.SendMsg()
 sendData.content = 'hello world'
-client.send(sendData, function(err, response) {
-	if(err){
-		return console.log(err)
-	}
-	console.log(response.result)
-	console.log(response.id)
+
+var timecount = 0;
+var sendfun = function(){
+  console.log('counter', timecount++);
+
+  client.send(sendData, function(err, response) {
+  if(err){
+    return console.log(err)
+  }
+  console.log(response.result)
+  console.log(response.id)
+
 });
+}
+sendfun();
+sendfun();
+
